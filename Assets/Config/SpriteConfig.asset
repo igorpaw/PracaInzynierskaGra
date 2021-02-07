@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9bbb7d076f402469690100cd8625b6, type: 3}
+  m_Name: SpriteConfig
+  m_EditorClassIdentifier: 
+  greenButton: {fileID: 21300000, guid: 878521614628bb744be6077374409d62, type: 3}
+  orangeButton: {fileID: 21300000, guid: 961787bc2a87b2a45b84db3e99b2e7bc, type: 3}
