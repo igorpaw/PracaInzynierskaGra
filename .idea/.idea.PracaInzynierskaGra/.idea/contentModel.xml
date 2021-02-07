@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\igor\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\igor\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_PracaInzynierskaGra.973336791.00" t="ExcludeRecursive" />
+    <e p="C:\Users\igor\Documents\GitHub\PracaInzynierskaGra" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Font" t="Include">
+          <e p="pizzadudedotdk.txt" t="Include" />
+        </e>
+        <e p="Mouse Gesture Interpretation" t="Include">
+          <e p="README.txt" t="Include" />
+          <e p="SceneExemple" t="Include">
+            <e p="Standard Assets" t="Include">
+              <e p="Characters" t="Include">
+                <e p="FirstPersonCharacter" t="Include">
+                  <e p="FirstPersonCharacterGuidelines.txt" t="Include" />
+                  <e p="Scripts" t="Include">
+                    <e p="FirstPersonController.cs" t="Include" />
+                    <e p="HeadBob.cs" t="Include" />
+                    <e p="MouseLook.cs" t="Include" />
+                    <e p="RigidbodyFirstPersonController.cs" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="CrossPlatformInput" t="Include">
+                <e p="CrossPlatformInputGuidelines.txt" t="Include" />
+                <e p="Scripts" t="Include">
+                  <e p="AxisTouchButton.cs" t="Include" />
+                  <e p="ButtonHandler.cs" t="Include" />
+                  <e p="CrossPlatformInputManager.cs" t="Include" />
+                  <e p="InputAxisScrollbar.cs" t="Include" />
+                  <e p="Joystick.cs" t="Include" />
+                  <e p="MobileControlRig.cs" t="Include" />
+                  <e p="PlatformSpecific" t="Include">
+                    <e p="MobileInput.cs" t="Include" />
+                    <e p="StandaloneInput.cs" t="Include" />
+                  </e>
+                  <e p="TiltInput.cs" t="Include" />
+                  <e p="TouchPad.cs" t="Include" />
+                  <e p="VirtualInput.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Utility" t="Include">
+                <e p="ActivateTrigger.cs" t="Include" />
+                <e p="AutoMobileShaderSwitch.cs" t="Include" />
+                <e p="AutoMoveAndRotate.cs" t="Include" />
+                <e p="CameraRefocus.cs" t="Include" />
+                <e p="CurveControlledBob.cs" t="Include" />
+                <e p="DragRigidbody.cs" t="Include" />
+                <e p="DynamicShadowSettings.cs" t="Include" />
+                <e p="EventSystemChecker.cs" t="Include" />
+                <e p="FollowTarget.cs" t="Include" />
+                <e p="ForcedReset.cs" t="Include" />
+                <e p="FOVKick.cs" t="Include" />
+                <e p="FPSCounter.cs" t="Include" />
+                <e p="LerpControlledBob.cs" t="Include" />
+                <e p="ObjectResetter.cs" t="Include" />
+                <e p="ParticleSystemDestroyer.cs" t="Include" />
+                <e p="PlatformSpecificContent.cs" t="Include" />
+                <e p="SimpleActivatorMenu.cs" t="Include" />
+                <e p="SimpleMouseRotator.cs" t="Include" />
+                <e p="SmoothFollow.cs" t="Include" />
+                <e p="TimedObjectActivator.cs" t="Include" />
+                <e p="TimedObjectDestructor.cs" t="Include" />
+                <e p="WaypointCircuit.cs" t="Include" />
+                <e p="WaypointProgressTracker.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="GestureScriptExemple.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Ball.cs" t="Include" />
+          <e p="Block.cs" t="Include" />
+          <e p="Control.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="GameMenu.cs" t="Include" />
+          <e p="HelpInitBlock.cs" t="Include" />
+          <e p="HelpInitCircle.cs" t="Include" />
+          <e p="HelpInitFive.cs" t="Include" />
+          <e p="HelpInitFourth.cs" t="Include" />
+          <e p="HelpInitTriangle.cs" t="Include" />
+          <e p="InGameManager.cs" t="Include" />
+          <e p="LevelConfig.cs" t="Include" />
+          <e p="LevelControler.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
+          <e p="Pointer.cs" t="Include" />
+          <e p="Racket.cs" t="Include" />
+          <e p="RestartBtnn.cs" t="Include" />
+          <e p="Settings.cs" t="Include" />
+          <e p="SettingsManager.cs" t="Include" />
+          <e p="SettingsMenu.cs" t="Include" />
+          <e p="SpriteConfig.cs" t="Include" />
+          <e p="SpriteManager.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="PracaInzynierskaGra.sln" t="IncludeFlat" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
