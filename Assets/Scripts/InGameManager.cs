@@ -55,6 +55,7 @@ public class InGameManager : MonoBehaviour
         LevelConfig conf = levelConfig.listOfLevels[level];
         bonus = conf.bonus;
         Ball.actualLevelNumber = level;
+        Ball.bonus = conf.bonus;
         if (level != 0)
         {
             ball.ResetPosition();

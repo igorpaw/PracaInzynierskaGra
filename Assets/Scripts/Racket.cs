@@ -14,6 +14,7 @@ public class Racket : MonoBehaviour {
     public GameObject leftArrow;
     private SettingsManager settingsManager;
     private Transform lastTransform;
+    
     private bool lastToLeft = false;
     private bool lastToRight = false;
     private bool lastToLeftStop= false;
@@ -24,6 +25,7 @@ public class Racket : MonoBehaviour {
     private bool startToLeft = false;
     private bool startToRightStop = false;
     private bool startToLeftStop = false;
+    
     private int tier = 1;
     private Vector3 target;
     private bool steeringGesture = false;
