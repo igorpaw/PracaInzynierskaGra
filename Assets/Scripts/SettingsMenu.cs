@@ -19,17 +19,14 @@ namespace Settings
         public GameObject lostButtonYes;
         public GameObject lostButtonNo;
         
-        public GameObject keyboardButton;
         public GameObject arrowsButton;
         public GameObject moveButton;
         public GameObject blinkButton;
         public GameObject gestButton;
-        
-        
-        public GameObject whiteButton;
-        public GameObject yellowButton;
-        public GameObject greenButton;
-        public GameObject redButton;
+        public GameObject gestTierButton;
+        public GameObject gestConButton;
+        public GameObject arrowsAddButton;
+        public GameObject moveAddButton;
         // Start is called before the first frame update
         void Start()
         {
@@ -37,6 +34,7 @@ namespace Settings
             settingsManager.LoadData();
             SetButtons();
         }
+        
         
         public void Back()
         {
@@ -49,10 +47,26 @@ namespace Settings
                 OppositeButtonClick(oppositeButtonYes,oppositeButtonNo);
             else
                 OppositeButtonClick(oppositeButtonNo,oppositeButtonYes);
+            if (settingsManager.sett.lostLives.Equals(LostLives.Yes))
+                ClickLostYesButton();
+            else
+                ClickLostNoButton();
             switch (settingsManager.sett.steeringMethod)
             {
-                case SteeringMethod.Keyboard:
-                    ClickKeyboardButton();
+                case SteeringMethod.GestCon:
+                    ClickGestConButton();
+                    break;
+                case SteeringMethod.Tier:
+                    ClickGestTierButton();
+                    break;
+                case SteeringMethod.Gesture:
+                    ClickGestureButton();
+                    break;
+                case SteeringMethod.ArrowsAdd:
+                    ClickArrowsAddButton();
+                    break;
+                case SteeringMethod.MoveAdd:
+                    ClickMoveAddButton();
                     break;
                 case SteeringMethod.Arrows:
                     ClickArrowsButton();
@@ -64,26 +78,7 @@ namespace Settings
                     ClickMoveButton();
                     break;
                 default:
-                    ClickKeyboardButton();
-                    break;
-            }
-
-            switch (settingsManager.sett.steeringArrowsColor)
-            {
-                case SteeringArrowsColor.White:
-                    ClickWhiteButton();
-                    break;
-                case SteeringArrowsColor.Yellow:
-                    ClickYellowButton();
-                    break;
-                case SteeringArrowsColor.Green:
-                    ClickGreenButton();
-                    break;
-                case SteeringArrowsColor.Red:
-                    ClickRedButton();
-                    break;
-                default:
-                    ClickWhiteButton();
+                    ClickBlinkButton();
                     break;
             }
         }
@@ -144,68 +139,67 @@ namespace Settings
         {
             settingsManager.sett.steeringMethod = SteeringMethod.EyesClosure;
             settingsManager.SaveData();
-            OppositeButtonClick(blinkButton,keyboardButton,moveButton,arrowsButton,gestButton);
+            OppositeButtonClick(blinkButton,moveButton,arrowsButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
 
         public void ClickMoveButton()
         {
             settingsManager.sett.steeringMethod = SteeringMethod.EyesPosition;
             settingsManager.SaveData();
-            OppositeButtonClick(moveButton,keyboardButton,arrowsButton,blinkButton,gestButton);
+            OppositeButtonClick(moveButton,arrowsButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickArrowsButton()
         {
             settingsManager.sett.steeringMethod = SteeringMethod.Arrows;
             settingsManager.SaveData();
-            OppositeButtonClick(arrowsButton,keyboardButton,moveButton,blinkButton,gestButton);
+            OppositeButtonClick(arrowsButton,moveButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
-        public void ClickKeyboardButton()
+        public void ClickGestTierButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.Keyboard;
+            settingsManager.sett.steeringMethod = SteeringMethod.Tier;
             settingsManager.SaveData();
-            OppositeButtonClick(keyboardButton,arrowsButton,moveButton,blinkButton,gestButton);
+            OppositeButtonClick(gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, gestConButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickGestureButton()
         {
             settingsManager.sett.steeringMethod = SteeringMethod.Gesture;
             settingsManager.SaveData();
-            OppositeButtonClick(gestButton,keyboardButton,arrowsButton,moveButton,blinkButton);
+            OppositeButtonClick(gestButton,arrowsButton,moveButton,blinkButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
-        public void ClickWhiteButton()
+        public void ClickGestConButton()
         {
-            settingsManager.sett.steeringArrowsColor = SteeringArrowsColor.White;
+            settingsManager.sett.steeringMethod = SteeringMethod.GestCon;
             settingsManager.SaveData();
-            OppositeButtonClick(whiteButton,yellowButton,greenButton,redButton);
-        }
-
-        public void ClickYellowButton()
-        {
-            settingsManager.sett.steeringArrowsColor = SteeringArrowsColor.Yellow;
-            settingsManager.SaveData();
-            OppositeButtonClick(yellowButton,whiteButton,greenButton,redButton);
+            OppositeButtonClick( gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, arrowsAddButton, moveAddButton);
         }
         
-        public void ClickGreenButton()
+        public void ClickArrowsAddButton()
         {
-            settingsManager.sett.steeringArrowsColor = SteeringArrowsColor.Green;
+            settingsManager.sett.steeringMethod = SteeringMethod.ArrowsAdd;
             settingsManager.SaveData();
-            OppositeButtonClick(greenButton,whiteButton,yellowButton,redButton);
+            OppositeButtonClick(arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, moveAddButton);
         }
         
-        public void ClickRedButton()
+        public void ClickMoveAddButton()
         {
-            settingsManager.sett.steeringArrowsColor = SteeringArrowsColor.Red;
+            settingsManager.sett.steeringMethod = SteeringMethod.MoveAdd;
             settingsManager.SaveData();
-            OppositeButtonClick(redButton,whiteButton,yellowButton,greenButton);
+            OppositeButtonClick(moveAddButton, arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton);
         }
+        
+        
+        
         
         void Update()
         {
-        
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            }
         }
     }
 }

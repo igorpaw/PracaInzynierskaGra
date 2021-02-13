@@ -9,7 +9,7 @@ namespace Settings
     public class SettingsManager : ScriptableObject
     {
         public Settings sett = new Settings();
-
+        
         public SettingsManager()
         {
             LoadData();

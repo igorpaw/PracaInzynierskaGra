@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Settings;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class InGameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class InGameManager : MonoBehaviour
 
     public static float timer = 0.0f;
     private static string name;
-    public FileStream fs;
+    public FileStream fs; 
     private SettingsManager settingsManager;
     private int level = 0;
     public Ball ball;
@@ -24,18 +25,28 @@ public class InGameManager : MonoBehaviour
     public StreamWriter m_WriterParameter;
     void Start()
     {
+        ResetTimer();
         settingsManager = ScriptableObject.CreateInstance("SettingsManager") as SettingsManager;
         LevelInit();
-        name = settingsManager.sett.steeringMethod + ".csv";
+        name = Path.GetFullPath(".") + "/" +  System.DateTime.Now.ToString("yyyy_MM_dd") + "_" + settingsManager.sett.steeringMethod + ".csv";
         if (File.Exists(name))
         {
             File.WriteAllText(name, string.Empty);
         }
     }
 
+    public static void ResetTimer()
+    {
+        timer = 0f;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
+        if (Input.GetKeyDown("q"))
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
     }
 
     public void BlockInit(int gridY, int gridX, int spacing)

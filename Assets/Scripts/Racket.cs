@@ -70,25 +70,39 @@ public class Racket : MonoBehaviour {
     {
         switch (settingsManager.sett.steeringMethod)
         {
-            case SteeringMethod.Keyboard:
-                SteeringByKeyboard();
+            case SteeringMethod.Gesture:
+                SteeringByGesture(false);
+                steeringGesture = true;
                 break;
             case SteeringMethod.Arrows:
-                //SteeringByArrows();
-                SteeringByArrowsAdaptive();
+                SteeringByArrows();
+                steeringGesture = false;
                 break;
-            case SteeringMethod.Gesture:
-                //SteeringByGesture(true);
-                SteeringByGestureConstant();
+            case SteeringMethod.Tier:
+                SteeringByGesture(true);
                 StopGesture();
                 steeringGesture = true;
                 break;
             case SteeringMethod.EyesClosure:
                 SteeringByEyesClosure();
+                steeringGesture = false;
                 break;
             case SteeringMethod.EyesPosition:
                 SteeringByEyesSimple();
-                //SteeringByEyesPositionAdaptive();
+                steeringGesture = false;
+                break;
+            case SteeringMethod.MoveAdd:
+                SteeringByEyesPositionAdaptive();
+                steeringGesture = false;
+                break;
+            case SteeringMethod.ArrowsAdd:
+                SteeringByArrowsAdaptive();
+                steeringGesture = false;
+                break;
+            case SteeringMethod.GestCon:
+                SteeringByGestureConstant();
+                StopGesture();
+                steeringGesture = true;
                 break;
             default:
                 SteeringByKeyboard();
@@ -607,7 +621,7 @@ public class Racket : MonoBehaviour {
     
     private void UpdateArrowsPosition()
     {
-        float offsetBetweenArrows = 35;
+        float offsetBetweenArrows = 225;
 
         GameObject leftArrowbject = GameObject.FindWithTag("LeftArrow");
         BoxCollider2D leftArrowBoxColider2D = leftArrow.GetComponent<BoxCollider2D>();
@@ -615,10 +629,10 @@ public class Racket : MonoBehaviour {
         GameObject rightArrowbject = GameObject.FindWithTag("RightArrow");
         BoxCollider2D rightArrowBoxColider2D = rightArrow.GetComponent<BoxCollider2D>();
 
-        leftArrowbject.transform.position = new Vector3(gameObject.transform.position.x - offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
+        leftArrowbject.transform.position = new Vector3(gameObject.transform.position.x - offsetBetweenArrows, -80, leftArrow.transform.position.z);
         leftArrowBoxColider2D.transform.position = new Vector3(gameObject.transform.position.x - offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
 
-        rightArrowbject.transform.position = new Vector3(gameObject.transform.position.x + offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
+        rightArrowbject.transform.position = new Vector3(gameObject.transform.position.x + offsetBetweenArrows, -80, leftArrow.transform.position.z);
         rightArrowBoxColider2D.GetComponent<SpriteRenderer>().transform.position = new Vector3(gameObject.transform.position.x + offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
     }
     
@@ -709,8 +723,8 @@ public class Racket : MonoBehaviour {
     public void ResetPosition()
     {
         if (settingsManager.sett.opposite.Equals(Opposite.Yes))
-            transform.position = new Vector3(0.6f,98,-2.875f);
+            transform.position = new Vector3(0.0f,110,-2.875f);
         else
-            transform.position = new Vector3(0.6f,-98,-2.875f);
+            transform.position = new Vector3(0.0f,-110,-2.875f);
     }
 }

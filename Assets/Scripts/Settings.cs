@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Settings
 {
-    public enum SteeringMethod { Keyboard = 0, Arrows, EyesClosure, EyesPosition, Gesture }
+    public enum SteeringMethod { Keyboard = 0, Arrows, EyesClosure, EyesPosition, Gesture, Tier, GestCon, MoveAdd, ArrowsAdd }
     public enum SteeringArrowsColor { White = 0, Grey, Yellow, Green, Cyan, Blue, Black, Red }
     public enum Opposite {No = 0, Yes}
     public enum Visible {No = 0, Yes}
