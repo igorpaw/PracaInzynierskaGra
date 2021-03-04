@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Block : MonoBehaviour
 {
@@ -26,10 +23,9 @@ public class Block : MonoBehaviour
     {
         if (col.gameObject.name == "Ball")
         {
-            InGameManager.AddLog("Block",col.transform,gameObject.transform,Ball.total_score, Ball.speed); 
-            Ball.total_score+=Ball.multiplier;
-            Ball.current_scene_score+=Ball.multiplier;
-            // gameObject is current figure (like this)
+            InGameManager.AddLog("Block",col.transform,gameObject.transform,Ball.TotalScore, Ball.Speed); 
+            Ball.TotalScore+=Ball.Multiplier;
+            Ball.CurrentSceneScore+=Ball.Multiplier;
             level--;
             Recolor();
             if(level == 0)

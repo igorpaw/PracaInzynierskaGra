@@ -28,7 +28,7 @@
           <e p="MainMenu.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
           <e p="Racket.cs" t="Include" />
-          <e p="RestartBtnn.cs" t="Include" />
+          <e p="RestartBtn.cs" t="Include" />
           <e p="Settings.cs" t="Include" />
           <e p="SettingsManager.cs" t="Include" />
           <e p="SettingsMenu.cs" t="Include" />

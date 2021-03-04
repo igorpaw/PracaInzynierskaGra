@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-    private bool reverse = false;
+    private bool _reverse = false;
+    public float easy = 80.0f;
+    public float medium = 100.0f;
+    public float hard = 120.0f;
 
     private void Update()
     {
@@ -18,7 +18,7 @@ public class GameMenu : MonoBehaviour
 
     public void ChangeReverse()
     {
-        reverse = !reverse;
+        _reverse = !_reverse;
     }
     
     public void Back()
@@ -28,19 +28,19 @@ public class GameMenu : MonoBehaviour
     
     public void OnEasyStartClick()
     {
-        Ball.speed = 80.0f;
+        Ball.Speed = easy;
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
     
     public void OnMediumStartClick()
     {
-        Ball.speed = 100.0f;
+        Ball.Speed = medium;
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
     
     public void OnHardStartClick()
     {
-        Ball.speed = 120.0f;
+        Ball.Speed = hard;
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 }

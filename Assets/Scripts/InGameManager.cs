@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Settings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = System.Random;
 
 public class InGameManager : MonoBehaviour
 {
@@ -13,14 +9,14 @@ public class InGameManager : MonoBehaviour
     public GameObject bobusPrefab;
     public LevelControler levelConfig;
 
-    public static float timer = 0.0f;
+    private static float _timer = 0.0f;
     private static string name;
     public FileStream fs; 
     private SettingsManager settingsManager;
-    private int level = 0;
+    private int _level = 0;
     public Ball ball;
     public Racket racket;
-    public static bool bonus;
+    private static bool _bonus;
 
     public StreamWriter m_WriterParameter;
     void Start()
@@ -37,12 +33,12 @@ public class InGameManager : MonoBehaviour
 
     public static void ResetTimer()
     {
-        timer = 0f;
+        _timer = 0f;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
         if (Input.GetKeyDown("q"))
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
@@ -63,11 +59,11 @@ public class InGameManager : MonoBehaviour
 
     public void LevelInit()
     {
-        LevelConfig conf = levelConfig.listOfLevels[level];
-        bonus = conf.bonus;
-        Ball.actualLevelNumber = level;
-        Ball.bonus = conf.bonus;
-        if (level != 0)
+        LevelConfig conf = levelConfig.listOfLevels[_level];
+        _bonus = conf.bonus;
+        Ball.ActualLevelNumber = _level;
+        Ball.Bonus = conf.bonus;
+        if (_level != 0)
         {
             ball.ResetPosition();
             racket.ResetPosition();
@@ -81,7 +77,7 @@ public class InGameManager : MonoBehaviour
             InitBonusLevel();
         }
 
-        level++;
+        _level++;
     }
 
     public void InitBonusLevel()
@@ -97,22 +93,22 @@ public class InGameManager : MonoBehaviour
             using (StreamWriter sw = File.CreateText(name))
             {
                 sw.WriteLine("Time;CollisionTarget;targetPositionX;targetPositionY;ballPositionX;ballPositionY;Score;Speed;Bonus");
-                sw.WriteLine(timer + ";" + collisionTarget + ";" +
+                sw.WriteLine(_timer + ";" + collisionTarget + ";" +
                              collisionTargetPosition.position.x + ";" +
                              collisionTargetPosition.position.y + ";" +
                              ballPosition.position.x + ";" +
                              ballPosition.position.y + ";" +
-                             score + ";" + speed + ";" + bonus);
+                             score + ";" + speed + ";" + _bonus);
             }	
         }
         using (StreamWriter sw = File.AppendText(name))
         {
-            sw.WriteLine(timer + ";" + collisionTarget + ";" +
+            sw.WriteLine(_timer + ";" + collisionTarget + ";" +
                          collisionTargetPosition.position.x + ";" +
                          collisionTargetPosition.position.y + ";" +
                          ballPosition.position.x + ";" +
                          ballPosition.position.y + ";" +
-                         score + ";" + speed + ";" + bonus);
+                         score + ";" + speed + ";" + _bonus);
         }
     }
 }

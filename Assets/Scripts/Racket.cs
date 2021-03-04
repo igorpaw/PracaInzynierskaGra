@@ -46,7 +46,7 @@ public class Racket : MonoBehaviour {
         rightArrow.SetActive(false);
         if (settingsManager.sett.opposite.Equals(Opposite.Yes))
             gameObject.transform.position = new Vector3(gameObject.transform.position.x,-gameObject.transform.position.y,gameObject.transform.position.z);
-        if (settingsManager.sett.steeringMethod.Equals(SteeringMethod.Arrows))
+        if (settingsManager.sett.steeringMethod.Equals(SteeringMethod.Arrows) || settingsManager.sett.steeringMethod.Equals(SteeringMethod.ArrowsAdd))
         {
             InstantiateArrows();
         }

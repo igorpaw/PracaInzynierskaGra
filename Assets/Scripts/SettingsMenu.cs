@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Settings
 {
     public class SettingsMenu : MonoBehaviour
     {
-        private SettingsManager settingsManager;
+        private SettingsManager _settingsManager;
 
         public GameObject oppositeButtonYes;
         public GameObject oppositeButtonNo;
@@ -30,8 +27,8 @@ namespace Settings
         // Start is called before the first frame update
         void Start()
         {
-            settingsManager = ScriptableObject.CreateInstance("SettingsManager") as SettingsManager;
-            settingsManager.LoadData();
+            _settingsManager = ScriptableObject.CreateInstance("SettingsManager") as SettingsManager;
+            _settingsManager.LoadData();
             SetButtons();
         }
         
@@ -43,15 +40,15 @@ namespace Settings
 
         private void SetButtons()
         {
-            if(settingsManager.sett.opposite.Equals(Opposite.Yes))
-                OppositeButtonClick(oppositeButtonYes,oppositeButtonNo);
+            if(_settingsManager.sett.opposite.Equals(Opposite.Yes))
+                SettingsButtonClick(oppositeButtonYes,oppositeButtonNo);
             else
-                OppositeButtonClick(oppositeButtonNo,oppositeButtonYes);
-            if (settingsManager.sett.lostLives.Equals(LostLives.Yes))
+                SettingsButtonClick(oppositeButtonNo,oppositeButtonYes);
+            if (_settingsManager.sett.lostLives.Equals(LostLives.Yes))
                 ClickLostYesButton();
             else
                 ClickLostNoButton();
-            switch (settingsManager.sett.steeringMethod)
+            switch (_settingsManager.sett.steeringMethod)
             {
                 case SteeringMethod.GestCon:
                     ClickGestConButton();
@@ -83,7 +80,7 @@ namespace Settings
             }
         }
 
-        private void OppositeButtonClick(GameObject buttonChoosen, params GameObject[] buttonsElse)
+        private void SettingsButtonClick(GameObject buttonChoosen, params GameObject[] buttonsElse)
         {
             buttonChoosen.GetComponent<SpriteRenderer>().sprite = SpriteManager.GetSprite(SpriteEnum.GreenButton);
             foreach (var button in buttonsElse)
@@ -95,100 +92,100 @@ namespace Settings
 
         public void ClickYesButton()
         {
-            settingsManager.sett.opposite = Opposite.Yes;
-            settingsManager.SaveData();
-            OppositeButtonClick(oppositeButtonYes,oppositeButtonNo);
+            _settingsManager.sett.opposite = Opposite.Yes;
+            _settingsManager.SaveData();
+            SettingsButtonClick(oppositeButtonYes,oppositeButtonNo);
         }
         
         public void ClickNoButton()
         {
-            settingsManager.sett.opposite = Opposite.No;
-            settingsManager.SaveData();
-            OppositeButtonClick(oppositeButtonNo,oppositeButtonYes);
+            _settingsManager.sett.opposite = Opposite.No;
+            _settingsManager.SaveData();
+            SettingsButtonClick(oppositeButtonNo,oppositeButtonYes);
         }
         
         public void ClickVisibleYesButton()
         {
-            settingsManager.sett.showArrows = Visible.Yes;
-            settingsManager.SaveData();
-            OppositeButtonClick(visibleButtonYes,visibleButtonNo);
+            _settingsManager.sett.showArrows = Visible.Yes;
+            _settingsManager.SaveData();
+            SettingsButtonClick(visibleButtonYes,visibleButtonNo);
         }
         
         public void ClickVisibleNoButton()
         {
-            settingsManager.sett.showArrows = Visible.No;
-            settingsManager.SaveData();
-            OppositeButtonClick(visibleButtonNo,visibleButtonYes);
+            _settingsManager.sett.showArrows = Visible.No;
+            _settingsManager.SaveData();
+            SettingsButtonClick(visibleButtonNo,visibleButtonYes);
         }
         
         public void ClickLostYesButton()
         {
-            settingsManager.sett.lostLives = LostLives.Yes;
-            settingsManager.SaveData();
-            OppositeButtonClick(lostButtonYes,lostButtonNo);
+            _settingsManager.sett.lostLives = LostLives.Yes;
+            _settingsManager.SaveData();
+            SettingsButtonClick(lostButtonYes,lostButtonNo);
         }
         
         public void ClickLostNoButton()
         {
-            settingsManager.sett.lostLives = LostLives.No;
-            settingsManager.SaveData();
-            OppositeButtonClick(lostButtonNo,lostButtonYes);
+            _settingsManager.sett.lostLives = LostLives.No;
+            _settingsManager.SaveData();
+            SettingsButtonClick(lostButtonNo,lostButtonYes);
         }
         
         public void ClickBlinkButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.EyesClosure;
-            settingsManager.SaveData();
-            OppositeButtonClick(blinkButton,moveButton,arrowsButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.EyesClosure;
+            _settingsManager.SaveData();
+            SettingsButtonClick(blinkButton,moveButton,arrowsButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
 
         public void ClickMoveButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.EyesPosition;
-            settingsManager.SaveData();
-            OppositeButtonClick(moveButton,arrowsButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.EyesPosition;
+            _settingsManager.SaveData();
+            SettingsButtonClick(moveButton,arrowsButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickArrowsButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.Arrows;
-            settingsManager.SaveData();
-            OppositeButtonClick(arrowsButton,moveButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.Arrows;
+            _settingsManager.SaveData();
+            SettingsButtonClick(arrowsButton,moveButton,blinkButton,gestButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickGestTierButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.Tier;
-            settingsManager.SaveData();
-            OppositeButtonClick(gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, gestConButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.Tier;
+            _settingsManager.SaveData();
+            SettingsButtonClick(gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, gestConButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickGestureButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.Gesture;
-            settingsManager.SaveData();
-            OppositeButtonClick(gestButton,arrowsButton,moveButton,blinkButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.Gesture;
+            _settingsManager.SaveData();
+            SettingsButtonClick(gestButton,arrowsButton,moveButton,blinkButton, gestConButton, gestTierButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickGestConButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.GestCon;
-            settingsManager.SaveData();
-            OppositeButtonClick( gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, arrowsAddButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.GestCon;
+            _settingsManager.SaveData();
+            SettingsButtonClick( gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, arrowsAddButton, moveAddButton);
         }
         
         public void ClickArrowsAddButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.ArrowsAdd;
-            settingsManager.SaveData();
-            OppositeButtonClick(arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, moveAddButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.ArrowsAdd;
+            _settingsManager.SaveData();
+            SettingsButtonClick(arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton, moveAddButton);
         }
         
         public void ClickMoveAddButton()
         {
-            settingsManager.sett.steeringMethod = SteeringMethod.MoveAdd;
-            settingsManager.SaveData();
-            OppositeButtonClick(moveAddButton, arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton);
+            _settingsManager.sett.steeringMethod = SteeringMethod.MoveAdd;
+            _settingsManager.SaveData();
+            SettingsButtonClick(moveAddButton, arrowsAddButton, gestConButton,gestTierButton,arrowsButton,moveButton,blinkButton,gestButton);
         }
         
         
