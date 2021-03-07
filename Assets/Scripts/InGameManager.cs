@@ -51,7 +51,7 @@ public class InGameManager : MonoBehaviour
         {
             for (int x = -4; x < gridX; x++)
             {
-                Vector3 pos = new Vector3(x, y, 0) * spacing;
+                Vector3 pos = new Vector3(x * spacing, y * spacing/2, 0);
                 Instantiate(prefab, pos, Quaternion.identity);
             }
         }
@@ -70,7 +70,7 @@ public class InGameManager : MonoBehaviour
         }
         if (!conf.bonus)
         {
-            BlockInit(conf.numberOfLines - 2, conf.numberOfColumns,20);
+            BlockInit(conf.numberOfLines - 2, conf.numberOfColumns,35);
         }
         else
         {

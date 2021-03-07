@@ -28,6 +28,10 @@ public class Block : MonoBehaviour
             Ball.CurrentSceneScore+=Ball.Multiplier;
             level--;
             Recolor();
+            if(GameObject.FindGameObjectsWithTag("Block").Length <= 1)
+            {
+                Ball.RoundEnd = true;
+            }
             if(level == 0)
                 Destroy(gameObject);
         }

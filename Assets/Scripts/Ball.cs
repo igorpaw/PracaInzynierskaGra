@@ -10,11 +10,12 @@ public class Ball : MonoBehaviour {
     private float _panelTime = 0.0f;
     public static int Multiplier = 1;
     public static int ActualLevelNumber;
+    public bool panelInit = false;
     public EndPanel panel;
 
     private SettingsManager _settingsManager;
     public LevelControler levelConfig;
-    private bool _roundEnd = false;
+    public static bool RoundEnd = false;
     
     public static int TotalScore = 0;
     public static int CurrentSceneScore;
@@ -90,11 +91,20 @@ public class Ball : MonoBehaviour {
     {
         _timeFromLostLife += Time.deltaTime;
         _bonusLevelTime += Time.deltaTime;
-        if (_roundEnd)
+        if (RoundEnd)
         {
+            if (!panelInit)
+            {
+                panel.Init(CurrentSceneScore, TotalScore, _bonusLevelTime, Bonus);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0) * Speed;
+                panelInit = true;
+            }
             _panelTime += Time.deltaTime;
-            if(_panelTime >= 5.0f)
+            if (_panelTime >= 5.0f)
+            {
+                panelInit = false;
                 NextLevel();
+            }
         }
         if (levelConfig.listOfLevels[ActualLevelNumber].bonus)
         {
@@ -137,19 +147,12 @@ public class Ball : MonoBehaviour {
             Destroy(gameObject);
             SceneManager.LoadScene("LoseScene", LoadSceneMode.Single);
         }
-        
-        if(GameObject.FindGameObjectsWithTag("Block").Length < 1)
-        {
-            _roundEnd = true;
-            panel.Init(CurrentSceneScore, TotalScore, _bonusLevelTime, Bonus);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0) * Speed;
-        }
     }
 
     private void NextLevel()
     {
         panel.Hide();
-        _roundEnd = false;
+        RoundEnd = false;
         _panelTime = 0.0f;
         Racket++;
         Speed += (float)10;
