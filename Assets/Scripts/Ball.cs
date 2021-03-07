@@ -1,4 +1,5 @@
-﻿using Settings;
+﻿using System;
+using Settings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +33,8 @@ public class Ball : MonoBehaviour {
         if (_settingsManager.sett.opposite == Opposite.Yes)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.down * Speed;
-            transform.position = new Vector3(transform.position.x,-transform.position.y,transform.position.z);
+            var position = transform.position;
+            transform.position = new Vector3(position.x,-position.y,position.z);
         }
         else
         {
