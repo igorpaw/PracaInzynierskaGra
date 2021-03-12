@@ -15,21 +15,21 @@ public class Racket : MonoBehaviour {
     private SettingsManager settingsManager;
     private Transform lastTransform;
     
-    private bool lastToLeft = false;
-    private bool lastToRight = false;
-    private bool lastToLeftStop= false;
-    private bool lastToRightStop = false;
-    private bool lastUp = false;
-    private bool lastDown = false;
-    private bool startToRight = false;
-    private bool startToLeft = false;
-    private bool startToRightStop = false;
-    private bool startToLeftStop = false;
+    private bool _lastToLeft = false;
+    private bool _lastToRight = false;
+    private bool _lastToLeftStop= false;
+    private bool _lastToRightStop = false;
+    private bool _lastUp = false;
+    private bool _lastDown = false;
+    private bool _startToRight = false;
+    private bool _startToLeft = false;
+    private bool _startToRightStop = false;
+    private bool _startToLeftStop = false;
     
-    private int tier = 1;
-    private Vector3 target;
-    private bool steeringGesture = false;
-    private bool gestureMove = false;
+    private int _tier = 1;
+    private Vector3 _target;
+    private bool _steeringGesture = false;
+    private bool _gestureMove = false;
     public int leftRight = 170;
     public int bottom = 60;
     public int activation = 40;
@@ -44,65 +44,66 @@ public class Racket : MonoBehaviour {
         settingsManager.LoadData();
         leftArrow.SetActive(false);
         rightArrow.SetActive(false);
+        Vector3 position = gameObject.transform.position;
         if (settingsManager.sett.opposite.Equals(Opposite.Yes))
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x,-gameObject.transform.position.y,gameObject.transform.position.z);
-        if (settingsManager.sett.steeringMethod.Equals(SteeringMethod.Arrows) || settingsManager.sett.steeringMethod.Equals(SteeringMethod.ArrowsAdd))
+            transform.position = new Vector3(gameObject.transform.position.x,-position.y,position.z);
+        if (settingsManager.sett.steeringMethod.Equals(SteeringMethod.Arrows) ||
+            settingsManager.sett.steeringMethod.Equals(SteeringMethod.ArrowsAdd))
         {
             InstantiateArrows();
         }
-        SpaceShipSteering();
+        RacketSteering();
     }
 
 
     void FixedUpdate()
     {
-        SpaceShipSteering();
-        if (steeringGesture && gestureMove)
+        RacketSteering();
+        if (_steeringGesture && _gestureMove)
         {
-            var dir=(target - transform.position).normalized;
+            var dir=(_target - transform.position).normalized;
             transform.position += dir * speed * Time.deltaTime;
-            if (target.x >= transform.position.x - 1 && target.x <= transform.position.x + 1)
-                gestureMove = false;
+            if (_target.x >= transform.position.x - 1 && _target.x <= transform.position.x + 1)
+                _gestureMove = false;
         }
     }
     
-    private void SpaceShipSteering()
+    private void RacketSteering()
     {
         switch (settingsManager.sett.steeringMethod)
         {
             case SteeringMethod.Gesture:
                 SteeringByGesture(false);
-                steeringGesture = true;
+                _steeringGesture = true;
                 break;
             case SteeringMethod.Arrows:
                 SteeringByArrows();
-                steeringGesture = false;
+                _steeringGesture = false;
                 break;
             case SteeringMethod.Tier:
                 SteeringByGesture(true);
-                StopGesture();
-                steeringGesture = true;
+                _steeringGesture = true;
                 break;
             case SteeringMethod.EyesClosure:
                 SteeringByEyesClosure();
-                steeringGesture = false;
+                _steeringGesture = false;
                 break;
             case SteeringMethod.EyesPosition:
                 SteeringByEyesSimple();
-                steeringGesture = false;
+                _steeringGesture = false;
                 break;
             case SteeringMethod.MoveAdd:
                 SteeringByEyesPositionAdaptive();
-                steeringGesture = false;
+                _steeringGesture = false;
                 break;
             case SteeringMethod.ArrowsAdd:
                 SteeringByArrowsAdaptive();
-                steeringGesture = false;
+                _steeringGesture = false;
                 break;
             case SteeringMethod.GestCon:
                 SteeringByGestureConstant();
                 StopGesture();
-                steeringGesture = true;
+                _steeringGesture = true;
                 break;
             default:
                 SteeringByKeyboard();
@@ -147,7 +148,7 @@ public class Racket : MonoBehaviour {
         if (pointer.transform.position.x >= 0 && pointer.transform.position.x < 40)
         {
             SetAllStopBool(false);
-            startToRightStop = true;
+            _startToRightStop = true;
             lastTransform = pointer.transform;
             return;
         }
@@ -155,17 +156,17 @@ public class Racket : MonoBehaviour {
         if (pointer.transform.position.x < 0 && pointer.transform.position.x > -40)
         {
             SetAllStopBool(false);
-            startToLeftStop = true;
+            _startToLeftStop = true;
             lastTransform = pointer.transform;
             return;
         }
         
-        if (startToRightStop)
+        if (_startToRightStop)
         {
             MoveToRightStop();
         }
 
-        if (startToLeftStop)
+        if (_startToLeftStop)
         {
             MoveToLeftStop();
         }
@@ -183,7 +184,7 @@ public class Racket : MonoBehaviour {
         if (pointer.transform.position.x >= 0 && pointer.transform.position.x < 40)
         {
             SetAllBool(false);
-            startToRight = true;
+            _startToRight = true;
             lastTransform = pointer.transform;
             return;
         }
@@ -191,17 +192,17 @@ public class Racket : MonoBehaviour {
         if (pointer.transform.position.x < 0 && pointer.transform.position.x > -40)
         {
             SetAllBool(false);
-            startToLeft = true;
+            _startToLeft = true;
             lastTransform = pointer.transform;
             return;
         }
             
-        if (startToRight)
+        if (_startToRight)
         {
             MoveToRight(true);
         }
 
-        if (startToLeft)
+        if (_startToLeft)
         {
             MoveToLeft(true);
         }
@@ -220,24 +221,24 @@ public class Racket : MonoBehaviour {
 
         if (!activationTiers)
         {
-            if (pointer.transform.position.x >= 0 && pointer.transform.position.x < 40)
+            if (pointer.transform.position.x >= 0 && pointer.transform.position.x < activation)
             {
                 SetAllBool(false);
-                startToRight = true;
+                _startToRight = true;
                 lastTransform = pointer.transform;
                 return;
             }
 
-            if (pointer.transform.position.x < 0 && pointer.transform.position.x > -40)
+            if (pointer.transform.position.x < 0 && pointer.transform.position.x > -activation)
             {
                 SetAllBool(false);
-                startToLeft = true;
+                _startToLeft = true;
                 lastTransform = pointer.transform;
                 return;
             }
         }
 
-        if (activationTiers && !startToLeft && !startToRight)
+        if (activationTiers && !_startToLeft && !_startToRight)
         {
             if (pointer.transform.position.x >= 0 && pointer.transform.position.x < 30)
             {
@@ -292,12 +293,12 @@ public class Racket : MonoBehaviour {
         }
         
 
-        if (startToRight)
+        if (_startToRight)
         {
             MoveToRight(false);
         }
 
-        if (startToLeft)
+        if (_startToLeft)
         {
             MoveToLeft(false);
         }
@@ -306,17 +307,17 @@ public class Racket : MonoBehaviour {
     private void SetTierRight(int tier)
     {
         SetAllBool(false);
-        startToRight = true;
+        _startToRight = true;
         lastTransform = pointer.transform;
-        this.tier = tier;
+        _tier = tier;
     }
     
     private void SetTierLeft(int tier)
     {
         SetAllBool(false);
-        startToLeft = true;
+        _startToLeft = true;
         lastTransform = pointer.transform;
-        this.tier = tier;
+        _tier = tier;
     }
     
     private void MoveToRightStop()
@@ -330,12 +331,12 @@ public class Racket : MonoBehaviour {
 
         if (pointer.transform.position.x >= lastTransform.position.x && pointer.transform.position.x < leftRight)
         {
-            lastToRightStop = true;
+            _lastToRightStop = true;
             lastTransform = pointer.transform;
             return;
         }
 
-        if (pointer.transform.position.x > leftRight && lastToRightStop)
+        if (pointer.transform.position.x > leftRight && _lastToRightStop)
         {
             MoveDown();
         }
@@ -353,12 +354,12 @@ public class Racket : MonoBehaviour {
 
             if (pointer.transform.position.x >= lastTransform.position.x && pointer.transform.position.x < leftRight)
             {
-                lastToRight = true;
+                _lastToRight = true;
                 lastTransform = pointer.transform;
                 return;
             }
 
-            if (pointer.transform.position.x > leftRight && lastToRight)
+            if (pointer.transform.position.x > leftRight && _lastToRight)
             {
                 MoveUp(true, constant);
             }
@@ -377,12 +378,12 @@ public class Racket : MonoBehaviour {
 
         if (pointer.transform.position.x <= lastTransform.position.x && pointer.transform.position.x > -leftRight)
         {
-            lastToLeftStop = true;
+            _lastToLeftStop = true;
             lastTransform = pointer.transform;
             return;
         }
 
-        if (pointer.transform.position.x < -leftRight && lastToLeftStop)
+        if (pointer.transform.position.x < -leftRight && _lastToLeftStop)
         {
             MoveDown();
         }
@@ -401,12 +402,12 @@ public class Racket : MonoBehaviour {
 
         if (pointer.transform.position.x <= lastTransform.position.x && pointer.transform.position.x > -leftRight)
         {
-            lastToLeft = true;
+            _lastToLeft = true;
             lastTransform = pointer.transform;
             return;
         }
 
-        if (pointer.transform.position.x < -leftRight && lastToLeft)
+        if (pointer.transform.position.x < -leftRight && _lastToLeft)
         {
             MoveUp(false, constant);
         }
@@ -417,11 +418,11 @@ public class Racket : MonoBehaviour {
     {
         if (pointer.transform.position.y > -activation)
         {
-            if (lastDown)
+            if (_lastDown)
             {
                 if (pointer.transform.position.y <= lastTransform.position.y)
                 {
-                    lastDown = true;
+                    _lastDown = true;
                     lastTransform = pointer.transform;
                     return;
                 }
@@ -430,12 +431,12 @@ public class Racket : MonoBehaviour {
                 return;
             }
 
-            lastDown = true;
+            _lastDown = true;
             lastTransform = pointer.transform;
             return;
         }
 
-        if (lastDown)
+        if (_lastDown)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0) * speed;
             SetAllStopBool(false);
@@ -449,11 +450,11 @@ public class Racket : MonoBehaviour {
     {
         if (pointer.transform.position.y < activation)
         {
-            if (lastUp)
+            if (_lastUp)
             {
                 if (pointer.transform.position.y >= lastTransform.position.y)
                 {
-                    lastUp = true;
+                    _lastUp = true;
                     lastTransform = pointer.transform;
                     return;
                 }
@@ -462,12 +463,12 @@ public class Racket : MonoBehaviour {
                 return;
             }
 
-            lastUp = true;
+            _lastUp = true;
             lastTransform = pointer.transform;
             return;
         }
 
-        if (lastUp)
+        if (_lastUp)
         {
             if (constant)
             {
@@ -482,16 +483,16 @@ public class Racket : MonoBehaviour {
             {
                 if (toRight)
                 {
-                    target = new Vector3(transform.position.x + moveSize*tier, transform.position.y,
+                    _target = new Vector3(transform.position.x + moveSize*_tier, transform.position.y,
                         transform.position.z);
-                    gestureMove = true;
+                    _gestureMove = true;
                 }
                    
                 else
                 {
-                    target = new Vector3(transform.position.x - moveSize*tier, transform.position.y,
+                    _target = new Vector3(transform.position.x - moveSize*_tier, transform.position.y,
                         transform.position.z);
-                    gestureMove = true;
+                    _gestureMove = true;
                 }
             }
             
@@ -505,20 +506,20 @@ public class Racket : MonoBehaviour {
 
     private void SetAllBool(bool state)
     {
-        lastUp = state;
-        lastToLeft = state;
-        lastToRight = state;
-        startToLeft = state;
-        startToRight = state;
+        _lastUp = state;
+        _lastToLeft = state;
+        _lastToRight = state;
+        _startToLeft = state;
+        _startToRight = state;
     }
     
     private void SetAllStopBool(bool state)
     {
-        lastDown = state;
-        startToLeftStop = state;
-        startToRightStop = state;
-        startToLeftStop = state;
-        startToRightStop = state;
+        _lastDown = state;
+        _startToLeftStop = state;
+        _startToRightStop = state;
+        _startToLeftStop = state;
+        _startToRightStop = state;
     }
     
     private void SteeringByEyesPositionAdaptive()
@@ -551,10 +552,9 @@ public class Racket : MonoBehaviour {
 
         if (distance < -120)
             return 1f;
-        else if (distance > 20)
+        if (distance > 20)
             return 0.25f;
-        else
-            return -distance / 120;
+        return -distance / 120;
     }
     
     private float GetLeftVelocitySide()
@@ -565,10 +565,9 @@ public class Racket : MonoBehaviour {
 
         if (distance < -120)
             return 1f;
-        else if (distance > 20)
+        if (distance > 20)
             return 0.25f;
-        else
-            return -distance / 120;
+        return -distance / 120;
     }
     
     private float GetRightVelocitySide()
@@ -578,10 +577,9 @@ public class Racket : MonoBehaviour {
 
         if (distance > 120)
             return 1f;
-        else if (distance < 20)
+        if (distance < 20)
             return 0.25f;
-        else
-            return distance / 120;
+        return distance / 120;
     }
 
     private float GetRightVelocity()
@@ -592,10 +590,9 @@ public class Racket : MonoBehaviour {
 
         if (distance > 120)
             return 1f;
-        else if (distance < 20)
+        if (distance < 20)
             return 0.25f;
-        else
-            return distance / 120;
+        return distance / 120;
     }
     
     
@@ -628,12 +625,13 @@ public class Racket : MonoBehaviour {
 
         GameObject rightArrowbject = GameObject.FindWithTag("RightArrow");
         BoxCollider2D rightArrowBoxColider2D = rightArrow.GetComponent<BoxCollider2D>();
+        Vector3 position = gameObject.transform.position;
 
-        leftArrowbject.transform.position = new Vector3(gameObject.transform.position.x - offsetBetweenArrows, -80, leftArrow.transform.position.z);
-        leftArrowBoxColider2D.transform.position = new Vector3(gameObject.transform.position.x - offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
+        leftArrowbject.transform.position = new Vector3(position.x - offsetBetweenArrows, -80, leftArrow.transform.position.z);
+        leftArrowBoxColider2D.transform.position = new Vector3(position.x - offsetBetweenArrows, position.y, leftArrow.transform.position.z);
 
-        rightArrowbject.transform.position = new Vector3(gameObject.transform.position.x + offsetBetweenArrows, -80, leftArrow.transform.position.z);
-        rightArrowBoxColider2D.GetComponent<SpriteRenderer>().transform.position = new Vector3(gameObject.transform.position.x + offsetBetweenArrows, gameObject.transform.position.y, leftArrow.transform.position.z);
+        rightArrowbject.transform.position = new Vector3(position.x + offsetBetweenArrows, -80, rightArrow.transform.position.z);
+        rightArrowBoxColider2D.GetComponent<SpriteRenderer>().transform.position = new Vector3(position.x + offsetBetweenArrows, position.y, rightArrow.transform.position.z);
     }
     
     private void SteeringByArrows()

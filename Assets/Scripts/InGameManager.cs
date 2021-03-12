@@ -17,6 +17,8 @@ public class InGameManager : MonoBehaviour
     public Ball ball;
     public Racket racket;
     private static bool _bonus;
+    private const int XCount = -4;
+    private const int YCount = -2;
 
     public StreamWriter m_WriterParameter;
     void Start()
@@ -31,7 +33,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public static void ResetTimer()
+    private static void ResetTimer()
     {
         _timer = 0f;
     }
@@ -45,13 +47,13 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void BlockInit(int gridY, int gridX, int spacing)
+    private void BlockInit(int gridY, int gridX, float spacing)
     {
-        for (int y = -2; y < gridY; y++)
+        for (int y = YCount; y < gridY; y++)
         {
-            for (int x = -4; x < gridX; x++)
+            for (int x = XCount; x < gridX; x++)
             {
-                Vector3 pos = new Vector3(x * spacing, y * spacing/2, 0);
+                Vector3 pos = new Vector3(x * spacing, (y * spacing/2), 0);
                 Instantiate(prefab, pos, Quaternion.identity);
             }
         }
@@ -80,35 +82,44 @@ public class InGameManager : MonoBehaviour
         _level++;
     }
 
-    public void InitBonusLevel()
+    private void InitBonusLevel()
     {
         Vector3 pos = new Vector3(UnityEngine.Random.Range(-160.0f, 160.0f), UnityEngine.Random.Range(-80.0f, 80.0f), 0);
         Instantiate(bobusPrefab, pos, Quaternion.identity);
     }
 
-    public static void AddLog(string collisionTarget, Transform collisionTargetPosition, Transform ballPosition, int score, float speed)
+    public static void AddLog(string collisionTarget, Transform collisionTargetPosition,
+        Transform ballPosition, int score, float speed)
     {
         if (!File.Exists(name) || new FileInfo(name).Length == 0)
         {
             using (StreamWriter sw = File.CreateText(name))
             {
-                sw.WriteLine("Time;CollisionTarget;targetPositionX;targetPositionY;ballPositionX;ballPositionY;Score;Speed;Bonus");
-                sw.WriteLine(_timer + ";" + collisionTarget + ";" +
-                             collisionTargetPosition.position.x + ";" +
-                             collisionTargetPosition.position.y + ";" +
-                             ballPosition.position.x + ";" +
-                             ballPosition.position.y + ";" +
-                             score + ";" + speed + ";" + _bonus);
+                sw.WriteLine("Time;CollisionTarget;targetPositionX;targetPositionY;" +
+                             "ballPositionX;ballPositionY;Score;Speed;Bonus");
+                WriteLog(sw, collisionTarget, collisionTargetPosition,
+                    ballPosition, score, speed);
             }	
         }
-        using (StreamWriter sw = File.AppendText(name))
+        else
         {
-            sw.WriteLine(_timer + ";" + collisionTarget + ";" +
-                         collisionTargetPosition.position.x + ";" +
-                         collisionTargetPosition.position.y + ";" +
-                         ballPosition.position.x + ";" +
-                         ballPosition.position.y + ";" +
-                         score + ";" + speed + ";" + _bonus);
+            using (StreamWriter sw = File.AppendText(name))
+            {
+                WriteLog(sw, collisionTarget, collisionTargetPosition,
+                    ballPosition, score, speed);
+            }
         }
+    }
+    private static void WriteLog(StreamWriter sw, string collisionTarget,
+        Transform collisionTargetPosition, Transform ballPosition, int score, float speed)
+    {
+        Vector3 objPosition = collisionTargetPosition.position;
+        Vector3 ballPos = ballPosition.position;
+        sw.WriteLine(_timer + ";" + collisionTarget + ";" +
+                     objPosition.x + ";" +
+                     objPosition.y + ";" +
+                     ballPos.x + ";" +
+                     ballPos.y + ";" +
+                     score + ";" + speed + ";" + _bonus);
     }
 }

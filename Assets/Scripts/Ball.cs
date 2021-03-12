@@ -43,10 +43,12 @@ public class Ball : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.name == "Racket" && _settingsManager.sett.opposite == Opposite.No)
+        if (col.gameObject.name == "Racket" &&
+            _settingsManager.sett.opposite == Opposite.No)
         {
-            InGameManager.AddLog("Racket",col.transform,gameObject.transform,TotalScore, Speed);
-            float x = hitFactor(transform.position,
+            InGameManager.AddLog("Racket",col.transform,
+                gameObject.transform,TotalScore, Speed);
+            float x = HitFactor(transform.position,
                 col.transform.position,
                 col.collider.bounds.size.x);
             
@@ -57,7 +59,7 @@ public class Ball : MonoBehaviour {
         if (col.gameObject.name == "Racket" && _settingsManager.sett.opposite == Opposite.Yes)
         {
             InGameManager.AddLog("Racket",col.transform,gameObject.transform,TotalScore, Speed);
-            float x = hitFactor(transform.position,
+            float x = HitFactor(transform.position,
                 col.transform.position,
                 col.collider.bounds.size.x);
             
@@ -83,8 +85,7 @@ public class Ball : MonoBehaviour {
             InGameManager.AddLog("RightBorder",col.transform,gameObject.transform,TotalScore, Speed);
         BallDestroy();
     }
-    float hitFactor(Vector2 ballPos, Vector2 racketPos,
-        float racketWidth)
+    float HitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth)
     {
         return (ballPos.x - racketPos.x) / racketWidth;
     }

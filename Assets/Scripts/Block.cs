@@ -23,7 +23,8 @@ public class Block : MonoBehaviour
     {
         if (col.gameObject.name == "Ball")
         {
-            InGameManager.AddLog("Block",col.transform,gameObject.transform,Ball.TotalScore, Ball.Speed); 
+            InGameManager.AddLog("Block",col.transform,
+                gameObject.transform,Ball.TotalScore, Ball.Speed); 
             Ball.TotalScore+=Ball.Multiplier;
             Ball.CurrentSceneScore+=Ball.Multiplier;
             level--;
