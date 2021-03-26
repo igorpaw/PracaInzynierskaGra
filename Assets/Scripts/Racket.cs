@@ -33,6 +33,15 @@ public class Racket : MonoBehaviour {
     public int leftRight = 170;
     public int bottom = 60;
     public int activation = 40;
+
+    public int minimal = 20;
+    public int maximal = 120;
+
+    public int tier1 = 30;
+    public int tier2 = 60;
+    public int tier3 = 90;
+    public int tier4 = 120;
+    public int tier5 = 150;
     
     public int moveSize = 20;
     public float racketLengh = 100f;
@@ -50,7 +59,7 @@ public class Racket : MonoBehaviour {
         if (settingsManager.sett.steeringMethod.Equals(SteeringMethod.Arrows) ||
             settingsManager.sett.steeringMethod.Equals(SteeringMethod.ArrowsAdd))
         {
-            InstantiateArrows();
+            Instantiate();
         }
         RacketSteering();
     }
@@ -240,86 +249,77 @@ public class Racket : MonoBehaviour {
 
         if (activationTiers && !_startToLeft && !_startToRight)
         {
-            if (pointer.transform.position.x >= 0 && pointer.transform.position.x < 30)
+            if (pointer.transform.position.x >= 0 && pointer.transform.position.x < tier1)
             {
-                SetTierRight(5);
+                SetLength(5, true);
                 return;
             }
-            if (pointer.transform.position.x >= 30 && pointer.transform.position.x < 60)
+            if (pointer.transform.position.x >= tier1 && pointer.transform.position.x < tier2)
             {
-                SetTierRight(4);
+                SetLength(4, true);
                 return;
             }
-            if (pointer.transform.position.x >= 60 && pointer.transform.position.x < 90)
+            if (pointer.transform.position.x >= tier2 && pointer.transform.position.x < tier3)
             {
-                SetTierRight(3);
+                SetLength(3, true);
                 return;
             }
-            if (pointer.transform.position.x >= 90 && pointer.transform.position.x < 120)
+            if (pointer.transform.position.x >= tier3 && pointer.transform.position.x < tier4)
             {
-                SetTierRight(2);
+                SetLength(2, true);
                 return;
             }
-            if (pointer.transform.position.x >= 120 && pointer.transform.position.x < 150)
+            if (pointer.transform.position.x >= tier4 && pointer.transform.position.x < tier5)
             {
-                SetTierRight(1);
+                SetLength(1, true);
                 return;
             }
-            if (pointer.transform.position.x < 0 && pointer.transform.position.x > -30)
+            if (pointer.transform.position.x < 0 && pointer.transform.position.x > -tier1)
             {
-                SetTierLeft(5);
+                SetLength(5, false);
                 return;
             }
-            if (pointer.transform.position.x < -30 && pointer.transform.position.x > -60)
+            if (pointer.transform.position.x < -tier1 && pointer.transform.position.x > -tier2)
             {
-                SetTierLeft(4);
+                SetLength(4, false);
                 return;
             }
-            if (pointer.transform.position.x < -60 && pointer.transform.position.x > -90)
+            if (pointer.transform.position.x < -tier2 && pointer.transform.position.x > -tier3)
             {
-                SetTierLeft(3);
+                SetLength(3, false);
                 return;
             }
-            if (pointer.transform.position.x < -90 && pointer.transform.position.x > -120)
+            if (pointer.transform.position.x < -tier3 && pointer.transform.position.x > -tier4)
             {
-                SetTierLeft(2);
+                SetLength(2, false);
                 return;
             }
-            if (pointer.transform.position.x < -120 && pointer.transform.position.x > -150)
+            if (pointer.transform.position.x < -tier4 && pointer.transform.position.x > -tier5)
             {
-                SetTierLeft(1);
+                SetLength(1, false);
                 return;
             }
         }
         
 
-        if (_startToRight)
-        {
-            MoveToRight(false);
-        }
+        if (_startToRight) MoveToRight(false);
 
-        if (_startToLeft)
-        {
-            MoveToLeft(false);
-        }
+        if (_startToLeft) MoveToLeft(false);
     }
 
-    private void SetTierRight(int tier)
+    private void SetLength(int tier, bool toRight)
     {
         SetAllBool(false);
-        _startToRight = true;
+        if(toRight)
+            _startToRight = true;
+        else
+        {
+            _startToLeft = true;
+        }
         lastTransform = pointer.transform;
         _tier = tier;
     }
-    
-    private void SetTierLeft(int tier)
-    {
-        SetAllBool(false);
-        _startToLeft = true;
-        lastTransform = pointer.transform;
-        _tier = tier;
-    }
-    
+
     private void MoveToRightStop()
     {
         if (pointer.transform.position.x < lastTransform.position.x && pointer.transform.position.x < leftRight)
@@ -345,14 +345,16 @@ public class Racket : MonoBehaviour {
 
     private void MoveToRight(bool constant)
     {
-            if (pointer.transform.position.x < lastTransform.position.x && pointer.transform.position.x < leftRight)
+            if (pointer.transform.position.x < lastTransform.position.x &&
+                pointer.transform.position.x < leftRight)
             {
                 SetAllBool(false);
                 lastTransform = pointer.transform;
                 return;
             }
 
-            if (pointer.transform.position.x >= lastTransform.position.x && pointer.transform.position.x < leftRight)
+            if (pointer.transform.position.x >= lastTransform.position.x &&
+                pointer.transform.position.x < leftRight)
             {
                 _lastToRight = true;
                 lastTransform = pointer.transform;
@@ -467,7 +469,9 @@ public class Racket : MonoBehaviour {
             lastTransform = pointer.transform;
             return;
         }
-
+        
+        Vector3 position = transform.position;
+        
         if (_lastUp)
         {
             if (constant)
@@ -483,15 +487,15 @@ public class Racket : MonoBehaviour {
             {
                 if (toRight)
                 {
-                    _target = new Vector3(transform.position.x + moveSize*_tier, transform.position.y,
-                        transform.position.z);
+                    _target = new Vector3(transform.position.x + moveSize*_tier, position.y,
+                        position.z);
                     _gestureMove = true;
                 }
                    
                 else
                 {
-                    _target = new Vector3(transform.position.x - moveSize*_tier, transform.position.y,
-                        transform.position.z);
+                    _target = new Vector3(transform.position.x - moveSize*_tier, position.y,
+                        position.z);
                     _gestureMove = true;
                 }
             }
@@ -528,12 +532,12 @@ public class Racket : MonoBehaviour {
         {
             if (pointer.transform.position.x < gameObject.transform.position.x)
             {
-                float velocity = GetLeftVelocity();
+                float velocity = GetVelocityValue();
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-velocity, 0) * speed;
             }
             else if (pointer.transform.position.x > gameObject.transform.position.x)
             {
-                float velocity = GetRightVelocity();
+                float velocity = GetVelocityValue();
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity, 0) * speed;
             }
 
@@ -544,58 +548,20 @@ public class Racket : MonoBehaviour {
         }
     }
     
-    private float GetLeftVelocity()
-    {
-        float cursorTransformX = pointer.transform.position.x;
-        float spaceShipTransformX = this.gameObject.transform.position.x;
-        float distance = cursorTransformX - spaceShipTransformX;
 
-        if (distance < -120)
+    private float GetVelocityValue()
+    {
+        float distance = pointer.transform.position.x - transform.position.x;
+        if (distance > maximal || distance < -maximal)
             return 1f;
-        if (distance > 20)
+        if (distance < minimal && distance > -minimal)
             return 0.25f;
+        if(distance > 0)
+            return distance / 120;
         return -distance / 120;
     }
-    
-    private float GetLeftVelocitySide()
-    {
-        float distance = pointer.transform.position.x;
-        
-        
 
-        if (distance < -120)
-            return 1f;
-        if (distance > 20)
-            return 0.25f;
-        return -distance / 120;
-    }
-    
-    private float GetRightVelocitySide()
-    {
-        float distance = pointer.transform.position.x;
-        
 
-        if (distance > 120)
-            return 1f;
-        if (distance < 20)
-            return 0.25f;
-        return distance / 120;
-    }
-
-    private float GetRightVelocity()
-    {
-        float cursorTransformX = pointer.transform.position.x;
-        float spaceShipTransformX = this.gameObject.transform.position.x;
-        float distance = cursorTransformX - spaceShipTransformX;
-
-        if (distance > 120)
-            return 1f;
-        if (distance < 20)
-            return 0.25f;
-        return distance / 120;
-    }
-    
-    
     private void SteeringByEyesSimple()
     {
         if (UnityEyetracker.et != null)
@@ -609,7 +575,7 @@ public class Racket : MonoBehaviour {
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * speed;
             }
 
-            if (Math.Abs(pointer.transform.position.x - gameObject.transform.position.x) < racketLengh / 5)
+            if (Math.Abs(pointer.transform.position.x - gameObject.transform.position.x) < racketLengh)
             {
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0) * speed;
             }
@@ -631,7 +597,7 @@ public class Racket : MonoBehaviour {
         leftArrowBoxColider2D.transform.position = new Vector3(position.x - offsetBetweenArrows, position.y, leftArrow.transform.position.z);
 
         rightArrowbject.transform.position = new Vector3(position.x + offsetBetweenArrows, -80, rightArrow.transform.position.z);
-        rightArrowBoxColider2D.GetComponent<SpriteRenderer>().transform.position = new Vector3(position.x + offsetBetweenArrows, position.y, rightArrow.transform.position.z);
+        rightArrowBoxColider2D.transform.position = new Vector3(position.x + offsetBetweenArrows, position.y, rightArrow.transform.position.z);
     }
     
     private void SteeringByArrows()
@@ -662,12 +628,12 @@ public class Racket : MonoBehaviour {
 
         if (leftArrowRenderer.bounds.Intersects(pointer.GetComponent<BoxCollider2D>().bounds))
         {
-            var velocity = GetLeftVelocitySide();
+            var velocity = GetVelocityValue();
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-velocity, 0) * speed;
         }
         else if (rightArrowRenderer.bounds.Intersects(pointer.GetComponent<BoxCollider2D>().bounds))
         {
-            var velocity = GetRightVelocitySide();
+            var velocity = GetVelocityValue();
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity, 0) * speed;
         }
         else
@@ -679,29 +645,27 @@ public class Racket : MonoBehaviour {
     }
     
     
-    private void InstantiateArrows()
+    private void Instantiate()
     {
         leftArrow.SetActive(true);
         rightArrow.SetActive(true);
-
         if (settingsManager.sett.showArrows == Visible.Yes)
         {
-            Color arrowsColor = GetArrowsColor();
-
+            Color arrowsColor = GetColor();
+            arrowsColor.a = 0.75f;
             leftArrow.GetComponent<SpriteRenderer>().color = arrowsColor;
             rightArrow.GetComponent<SpriteRenderer>().color = arrowsColor;
         }
         else
         {
-            Color arrowsTransparentColor = GetArrowsColor();
+            Color arrowsTransparentColor = GetColor();
             arrowsTransparentColor.a = 0f;
-
             leftArrow.GetComponent<SpriteRenderer>().color = arrowsTransparentColor;
             rightArrow.GetComponent<SpriteRenderer>().color = arrowsTransparentColor;
         }
     }
     
-    private Color GetArrowsColor()
+    private Color GetColor()
     {
         switch (settingsManager.sett.steeringArrowsColor)
         {

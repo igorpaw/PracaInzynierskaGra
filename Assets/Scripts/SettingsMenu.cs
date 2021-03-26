@@ -44,7 +44,7 @@ namespace Settings
                 SettingsButtonClick(oppositeButtonYes,oppositeButtonNo);
             else
                 SettingsButtonClick(oppositeButtonNo,oppositeButtonYes);
-            if (_settingsManager.sett.lostLives.Equals(LostLives.Yes))
+            if (_settingsManager.sett.lostChance.Equals(LostChance.Yes))
                 ClickLostYesButton();
             else
                 ClickLostNoButton();
@@ -80,12 +80,15 @@ namespace Settings
             }
         }
 
-        private void SettingsButtonClick(GameObject buttonChoosen, params GameObject[] buttonsElse)
+        private void SettingsButtonClick(GameObject buttonChoosen,
+            params GameObject[] buttonsElse)
         {
-            buttonChoosen.GetComponent<SpriteRenderer>().sprite = SpriteManager.GetSprite(SpriteEnum.GreenButton);
+            buttonChoosen.GetComponent<SpriteRenderer>().sprite =
+                SpriteManager.GetSprite(SpriteEnum.GreenButton);
             foreach (var button in buttonsElse)
             {
-                button.GetComponent<SpriteRenderer>().sprite = SpriteManager.GetSprite(SpriteEnum.OrangeButton);  
+                button.GetComponent<SpriteRenderer>().sprite =
+                    SpriteManager.GetSprite(SpriteEnum.OrangeButton);  
             }
         }
         
@@ -120,14 +123,14 @@ namespace Settings
         
         public void ClickLostYesButton()
         {
-            _settingsManager.sett.lostLives = LostLives.Yes;
+            _settingsManager.sett.lostChance = LostChance.Yes;
             _settingsManager.SaveData();
             SettingsButtonClick(lostButtonYes,lostButtonNo);
         }
         
         public void ClickLostNoButton()
         {
-            _settingsManager.sett.lostLives = LostLives.No;
+            _settingsManager.sett.lostChance = LostChance.No;
             _settingsManager.SaveData();
             SettingsButtonClick(lostButtonNo,lostButtonYes);
         }

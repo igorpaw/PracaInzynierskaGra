@@ -11,7 +11,7 @@ ScriptsOnlyBuild:
     - MainMenu
     - Pointer
     - Racket
-    - RestartBtnn
+    - RestartBtn
     - Settings.SettingsMenu
     - SpriteConfig
     Unity.2D.Tilemap.Editor.dll:
@@ -36,7 +36,6 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
@@ -72,31 +71,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11278}
     - Class: 114
-      Script: {instanceID: 11472}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11566}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12330}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12484}
     - Class: 114
-      Script: {instanceID: 12876}
+      Script: {instanceID: 12866}
     - Class: 114
-      Script: {instanceID: 13058}
+      Script: {instanceID: 13048}
     - Class: 114
-      Script: {instanceID: 13430}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13498}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 14028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -135,17 +134,17 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11572}
+      Script: {instanceID: 11562}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12036}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12038}
+      Script: {instanceID: 12028}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 14028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -169,26 +168,28 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11566}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12826}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12882}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13498}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 14028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -198,6 +199,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -227,19 +230,19 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12036}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 12694}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13694}
     - Class: 114
-      Script: {instanceID: 14034}
+      Script: {instanceID: 14024}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 14028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -276,23 +279,23 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12036}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12038}
+      Script: {instanceID: 12028}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13498}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 14028}
     - Class: 114
-      Script: {instanceID: 14068}
+      Script: {instanceID: 14058}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -324,28 +327,28 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11566}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12826}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12882}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13498}
     - Class: 114
-      Script: {instanceID: 14038}
-    - Class: 114
-      Script: {instanceID: 20854}
+      Script: {instanceID: 14028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -355,6 +358,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -385,7 +390,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 84506c67f3f39df813b88f5cbe507273
+      Hash: f6bd01a01ada16a81ac9e96fd578a976
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ball
@@ -517,7 +522,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: c2b94dc963f4ef9b5870248f35a493d9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameMenu
@@ -859,10 +864,10 @@ ScriptsOnlyBuild:
     className: EndPanel
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 0fb2b962a48d2f6039fa9915b7639cc3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: RestartBtnn
+    className: RestartBtn
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -967,7 +972,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 30b6fb41b74b0096330050dd99c71baa
+      Hash: cb17c65243a3175af3e1f2dcc413cff9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Racket
@@ -1057,7 +1062,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 0f86ff2e4a00af7d5992350f49578f3a
+      Hash: 7c163a077f6966480b402ee1434c1b99
     assemblyName: Assembly-CSharp.dll
     namespaceName: Settings
     className: SettingsManager
@@ -1189,4 +1194,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Game.unity
   - Assets/Scenes/GameMenu.unity
   - Assets/Scenes/Settings.unity
-  playerPath: C:/Users/igor/Desktop/Build/ArkanoidEyetrackerGame.exe
+  playerPath: C:/Users/igor/Desktop/NowyBuild/ArkanoidEyetrackerGame.exe

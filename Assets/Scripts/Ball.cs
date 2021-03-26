@@ -30,6 +30,8 @@ public class Ball : MonoBehaviour {
         _settingsManager = ScriptableObject.CreateInstance("SettingsManager") as SettingsManager;
         _settingsManager.LoadData();
         panel.Hide();
+        TotalScore = 0;
+        CurrentSceneScore = 0;
         if (_settingsManager.sett.opposite == Opposite.Yes)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.down * Speed;
@@ -137,7 +139,7 @@ public class Ball : MonoBehaviour {
 
     private void LostLife()
     {
-        if(_settingsManager.sett.lostLives == LostLives.Yes)
+        if(_settingsManager.sett.lostChance == LostChance.Yes)
             Racket--;
         Multiplier = 1;
         _timeFromLostLife = 0.0f;

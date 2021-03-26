@@ -61,25 +61,32 @@ public class InGameManager : MonoBehaviour
 
     public void LevelInit()
     {
-        LevelConfig conf = levelConfig.listOfLevels[_level];
-        _bonus = conf.bonus;
-        Ball.ActualLevelNumber = _level;
-        Ball.Bonus = conf.bonus;
-        if (_level != 0)
+        if (levelConfig.listOfLevels.Count > _level)
         {
-            ball.ResetPosition();
-            racket.ResetPosition();
-        }
-        if (!conf.bonus)
-        {
-            BlockInit(conf.numberOfLines - 2, conf.numberOfColumns,35);
+            LevelConfig conf = levelConfig.listOfLevels[_level];
+            _bonus = conf.bonus;
+            Ball.ActualLevelNumber = _level;
+            Ball.Bonus = conf.bonus;
+            if (_level != 0)
+            {
+                ball.ResetPosition();
+                racket.ResetPosition();
+            }
+            if (!conf.bonus)
+            {
+                BlockInit(conf.numberOfLines - 2, conf.numberOfColumns,35);
+            }
+            else
+            {
+                InitBonusLevel();
+            }
+
+            _level++;
         }
         else
         {
-            InitBonusLevel();
+            SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
         }
-
-        _level++;
     }
 
     private void InitBonusLevel()

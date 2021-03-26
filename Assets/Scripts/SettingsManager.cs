@@ -55,7 +55,7 @@ namespace Settings
             sett.showArrows = Visible.Yes;
             sett.steeringArrowsColor = SteeringArrowsColor.White;
             sett.opposite = Opposite.No;
-            sett.lostLives = LostLives.Yes;
+            sett.lostChance = LostChance.Yes;
 
         }
     }

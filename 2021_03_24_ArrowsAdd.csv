@@ -1,0 +1,5 @@
+Time;CollisionTarget;targetPositionX;targetPositionY;ballPositionX;ballPositionY;Score;Speed;Bonus
+0,1676006;Block;0,2;-45,87601;0;-35;0;80;False
+0,9060045;Racket;-3,798232;-109,6;0,2;-101,988;1;80;False
+1,640418;Block;4,242682;-46,00873;0;-35;1;80;False
+2,476084;Ground;0,15;-117,8;8,836646;-109,985;2;80;False
